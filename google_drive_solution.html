@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Google Drive Image Integration - Diabetes TLM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #4285f4;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4285f4;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #4285f4;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .important {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .btn {
+            background: #4285f4;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #3367d6;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .image-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .image-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .folder-structure {
+            background: #f6f8fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4285f4;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Google Drive Image Integration</h1>
+            <p>Host images on Google Drive and display them on Google Sites</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">PNG Images</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2.7 MB</div>
+                <div class="stat-label">Total Size</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">HTML File</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">No Embedding</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <h3>🎯 Upload Images to Google Drive</h3>
+            <p>Create a folder in Google Drive and upload all PNG images:</p>
+
+            <div class="folder-structure">
+                📁 Google Drive/
+                └── 📁 diabetes_visualizations/
+                    ├── 🖼️ pathophysiology_diagram.png
+                    ├── 🖼️ epidemiology_chart.png
+                    ├── 🖼️ treatment_algorithm.png
+                    ├── 🖼️ prevention_flowchart.png
+                    ├── 🖼️ national_program_diagram.png
+                    └── 🖼️ control_strategies_diagram.png
+            </div>
+
+            <div class="important">
+                <strong>📋 Important:</strong> After uploading, you need to make the images publicly accessible and get their direct links.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <h3>🔗 Get Shareable Links</h3>
+            <p>For each image in Google Drive:</p>
+            <ol>
+                <li>Right-click the image → "Get shareable link"</li>
+                <li>Make it "Anyone with the link can view"</li>
+                <li>Copy the link and convert it to direct image URL</li>
+            </ol>
+
+            <p><strong>Example conversion:</strong></p>
+            <div class="code-block">
+                <strong>Google Drive Link:</strong><br>
+                https://drive.google.com/file/d/1ABC123def456/view?usp=sharing<br><br>
+                <strong>Direct Image URL:</strong><br>
+                https://drive.google.com/uc?export=view&id=1ABC123def456
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <h3>⚡ Auto-Update HTML</h3>
+            <p>Use this automated tool to update your HTML with Google Drive URLs:</p>
+
+            <textarea id="driveUrls" placeholder="Paste your Google Drive direct URLs here (one per line):
+https://drive.google.com/uc?export=view&id=YOUR_IMAGE_ID_1
+https://drive.google.com/uc?export=view&id=YOUR_IMAGE_ID_2
+..." rows="8" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin: 10px 0;"></textarea>
+
+            <button class="btn" onclick="processDriveLinks()">🔧 Update HTML with Google Drive Links</button>
+
+            <div id="processingResult" style="display: none; margin-top: 20px;">
+                <div class="success" id="resultMessage"></div>
+                <button class="btn" onclick="downloadUpdatedHtml()" style="margin-top: 10px; background: #34a853;">💾 Download Updated HTML</button>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-number">4</span>
+            <h3>🌐 Publish to Google Sites</h3>
+            <p>Upload the updated HTML file to Google Sites:</p>
+            <ul>
+                <li>Open your Google Site</li>
+                <li>Insert → Embed → Embed code</li>
+                <li>Paste your HTML or upload the file</li>
+                <li>All images will load from Google Drive!</li>
+            </ul>
+        </div>
+
+        <div class="image-preview">
+            <h3 style="grid-column: 1 / -1; margin-bottom: 15px;">🖼️ Your Current Images:</h3>
+
+            <div class="image-card">
+                <img src="visualizations/pathophysiology_diagram.png" alt="Pathophysiology Diagram">
+                <strong>Pathophysiology Diagram</strong><br>
+                <span style="color: #666;">439 KB</span>
+            </div>
+
+            <div class="image-card">
+                <img src="visualizations/epidemiology_chart.png" alt="Epidemiology Chart">
+                <strong>Epidemiology Chart</strong><br>
+                <span style="color: #666;">364 KB</span>
+            </div>
+
+            <div class="image-card">
+                <img src="visualizations/treatment_algorithm.png" alt="Treatment Algorithm">
+                <strong>Treatment Algorithm</strong><br>
+                <span style="color: #666;">528 KB</span>
+            </div>
+
+            <div class="image-card">
+                <img src="visualizations/prevention_flowchart.png" alt="Prevention Flowchart">
+                <strong>Prevention Flowchart</strong><br>
+                <span style="color: #666;">387 KB</span>
+            </div>
+
+            <div class="image-card">
+                <img src="visualizations/national_program_diagram.png" alt="NPCDCS Structure">
+                <strong>NPCDCS Structure</strong><br>
+                <span style="color: #666;">594 KB</span>
+            </div>
+
+            <div class="image-card">
+                <img src="visualizations/control_strategies_diagram.png" alt="Control Strategies">
+                <strong>Control Strategies</strong><br>
+                <span style="color: #666;">433 KB</span>
+            </div>
+        </div>
+
+        <div class="success">
+            <h4>🎉 Benefits of This Approach:</h4>
+            <ul>
+                <li>✅ HTML file stays small (~50KB)</li>
+                <li>✅ Images can be updated independently</li>
+                <li>✅ Perfect for Google Sites compatibility</li>
+                <li>✅ Easy to manage and maintain</li>
+                <li>✅ No base64 encoding/decoding</li>
+                <li>✅ Images load directly from Google Drive</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let updatedHtml = null;
+
+        // URL mapping for images
+        const imageMap = {
+            'pathophysiology_diagram.png': null,
+            'epidemiology_chart.png': null,
+            'treatment_algorithm.png': null,
+            'prevention_flowchart.png': null,
+            'national_program_diagram.png': null,
+            'control_strategies_diagram.png': null
+        };
+
+        async function processDriveLinks() {
+            const urlsText = document.getElementById('driveUrls').value.trim();
+            if (!urlsText) {
+                alert('Please enter your Google Drive URLs first!');
+                return;
+            }
+
+            const urls = urlsText.split('\n').map(url => url.trim()).filter(url => url);
+            const resultDiv = document.getElementById('processingResult');
+            const resultMessage = document.getElementById('resultMessage');
+
+            // Map URLs to image names
+            const imageNames = Object.keys(imageMap);
+            const urlMap = {};
+
+            for (let i = 0; i < Math.min(urls.length, imageNames.length); i++) {
+                urlMap[imageNames[i]] = urls[i];
+            }
+
+            try {
+                // Load the original HTML
+                const response = await fetch('interactive/diabetes_interactive_tlm.html');
+                if (!response.ok) {
+                    throw new Error('Could not load HTML file');
+                }
+
+                let htmlContent = await response.text();
+
+                // Replace image references
+                let replacements = 0;
+                for (const [imageName, driveUrl] of Object.entries(urlMap)) {
+                    // Replace various pattern types
+                    const patterns = [
+                        new RegExp(`src="[^"]*${imageName}"`, 'g'),
+                        new RegExp(`background-image:\\s*url\\([^)]*${imageName}[^)]*\\)`, 'g')
+                    ];
+
+                    for (const pattern of patterns) {
+                        htmlContent = htmlContent.replace(pattern, (match) => {
+                            replacements++;
+                            if (match.includes('src=')) {
+                                return `src="${driveUrl}"`;
+                            } else if (match.includes('background-image')) {
+                                return `background-image: url("${driveUrl}")`;
+                            }
+                            return match;
+                        });
+                    }
+
+                    // Also replace in placeholder divs
+                    if (driveUrl) {
+                        const placeholderTag = `<img src="${driveUrl}" alt="${imageName.replace(/_/g, ' ').replace('.png', '').replace(/\b\w/g, l => l.toUpperCase())}" style="width: 100%; border-radius: 8px;">`;
+
+                        // Replace placeholder divs based on image type
+                        if (imageName === 'pathophysiology_diagram.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#9b59b6[^"]*">[\s\S]*?<\/div>/g,
+                                `<div style="margin-bottom: 30px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        } else if (imageName === 'epidemiology_chart.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">(?![\s\S]*?(?:Prevention|NPCDCS|Control))[\s\S]*?<\/div>/g,
+                                `<div style="margin-bottom: 20px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        } else if (imageName === 'treatment_algorithm.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*>[\s\S]*?Management Tab Diagram[\s\S]*?<\/div>\s*<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">[\s\S]*?<\/div>/g,
+                                `<div>Management Tab Diagram</div><div style="margin-bottom: 20px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        } else if (imageName === 'prevention_flowchart.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*style="[^"]*margin-top:\s*20px[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*"[^>]*>[\s\S]*?Prevention Flowchart[\s\S]*?<\/div>/g,
+                                `<div style="margin-top: 20px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        } else if (imageName === 'national_program_diagram.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*style="[^"]*margin-top:\s*20px[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*"[^>]*>[\s\S]*?NPCDCS[\s\S]*?<\/div>/g,
+                                `<div style="margin-top: 20px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        } else if (imageName === 'control_strategies_diagram.png') {
+                            htmlContent = htmlContent.replace(
+                                /<div[^>]*>[\s\S]*?Control Strategies[\s\S]*?<\/div>\s*<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">[\s\S]*?<\/div>/g,
+                                `<div>Control Strategies</div><div style="margin-bottom: 20px;">${placeholderTag}</div>`
+                            );
+                            replacements++;
+                        }
+                    }
+                }
+
+                updatedHtml = htmlContent;
+                resultMessage.innerHTML = `
+                    <strong>✅ Success!</strong><br>
+                    - Updated HTML with ${Object.keys(urlMap).length} Google Drive URLs<br>
+                    - Made ${replacements} replacements in the HTML<br>
+                    - All images now load from Google Drive<br>
+                    - Ready to upload to Google Sites!
+                `;
+                resultDiv.style.display = 'block';
+
+            } catch (error) {
+                resultMessage.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        function downloadUpdatedHtml() {
+            if (!updatedHtml) {
+                alert('No processed HTML available. Please process the URLs first.');
+                return;
+            }
+
+            const blob = new Blob([updatedHtml], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'diabetes_interactive_tlm_googledrive.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

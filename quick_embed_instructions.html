@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick Image Embed Instructions</title>
+    <style>body{font-family:Arial;margin:20px;}code{background:#f0f0f0;padding:2px 4px;border-radius:3px;}</style>
+</head>
+<body>
+    <h1>🚀 Quick: Make Your Diabetes HTML Standalone with Images</h1>
+
+    <p><strong>Goal:</strong> Embed PNG images directly into HTML so it works offline and on Google Sites</p>
+
+    <h2>Step 1: Convert Images to Base64</h2>
+    <ol>
+        <li>Open <a href="https://base64.guru/converter/encode/image" target="_blank">https://base64.guru/converter/encode/image</a></li>
+        <li>Upload each PNG file from <code>TLM_Diabetes_Mellitus/visualizations/</code> folder</li>
+        <li>Copy the generated <code>data:image/png;base64,</code> code</li>
+    </ol>
+
+    <h2>Step 2: Edit HTML File</h2>
+    <p>In <code>diabetes_interactive_tlm.html</code>, replace these sections:</p>
+
+    <h3>Pathophysiology Diagram (around line 450):</h3>
+    <p><strong>FIND:</strong></p>
+    <code><div style="margin-bottom: 30px; background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border: 2px dashed #9b59b6;"></code><br>
+    <p><strong>REPLACE WITH:</strong></p>
+    <code><div style="margin-bottom: 30px;"><img src="YOUR_BASE64_CODE_HERE" alt="Pathophysiology Diagram" style="width: 100%; border-radius: 8px;"></div></code>
+
+    <h3>Epidemiology Chart (around line 800):</h3>
+    <p><strong>FIND:</strong></p>
+    <code><div style="margin-bottom: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border: 2px dashed #3498db;"></code><br>
+    <p><strong>REPLACE WITH:</strong></p>
+    <code><div style="margin-bottom: 20px;"><img src="YOUR_BASE64_CODE_HERE" alt="Epidemiology Trends Chart" style="width: 100%; border-radius: 8px;"></div></code>
+
+    <h3>Management Tab Diagram (around line 1250):</h3>
+    <p><strong>FIND:</strong></p>
+    <code><div style="margin-bottom: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border: 2px dashed #3498db;"></code><br>
+    <p><strong>REPLACE WITH:</strong></p>
+    <code><div style="margin-bottom: 20px;"><img src="YOUR_BASE64_CODE_HERE" alt="Management Algorithm" style="width: 100%; border-radius: 8px;"></div></code>
+
+    <h3>Prevention Flowchart (around line 1500):</h3>
+    <p><strong>FIND:</strong></p>
+    <code><div style="margin-top: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border: 2px dashed #3498db;"></code><br>
+    <p><strong>REPLACE WITH:</strong></p>
+    <code><div style="margin-top: 20px;"><img src="YOUR_BASE64_CODE_HERE" alt="Prevention Flowchart" style="width: 100%; border-radius: 8px;"></div></code>
+
+    <h3>NPCDCS Diagram (around line 1650):</h3>
+    <p><strong>FIND:</strong></p>
+    <code><div style="margin-top: 20px; background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center; border: 2px dashed #3498db;"></code><br>
+    <p><strong>REPLACE WITH:</strong></p>
+    <code><div style="margin-top: 20px;"><img src="YOUR_BASE64_CODE_HERE" alt="NPCDCS Structure" style="width: 100%; border-radius: 8px;"></div></code>
+
+    <h2>Step 3: Test & Upload</h2>
+    <ul>
+        <li>Save the HTML file</li>
+        <li>Open in browser - all images should display</li>
+        <li>Upload to Google Sites - works perfectly!</li>
+    </ul>
+
+    <p><strong>Result:</strong> One standalone HTML file (2-3MB) with all images embedded - works everywhere offline! 🎉</p>
+</body>
+</html>

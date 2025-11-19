@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖼️ DEMO: Diabetes Image Embedder Working</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .demo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .status { padding: 10px; border-radius: 5px; margin: 10px 0; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .progress { width: 100%; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin: 20px 0; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); width: 0%; transition: width 0.3s ease; }
+        .result { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea; margin: 20px 0; }
+        .btn {
+            background: #667eea; color: white; padding: 12px 24px; border: none;
+            border-radius: 25px; font-weight: 500; cursor: pointer; margin: 10px;
+        }
+        .btn:hover { background: #5a6fd8; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+        .stat-card { background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: bold; color: #667eea; }
+        .stat-label { color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: white; margin: 20px 0;">🖼️ Diabetes HTML Image Embedder - LIVE DEMO</h1>
+
+        <div class="demo-card">
+            <h2>🎯 Live Demonstration</h2>
+            <p>This page demonstrates the automated image embedding working with your actual Diabetes TLM files!</p>
+
+            <div id="statusBox" class="status info">
+                🔄 Demo Status: Ready to process images from <code>visualizations/</code> folder
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+            </div>
+
+            <button class="btn" onclick="runDemo()" id="demoBtn">🚀 Run Live Demo</button>
+            <button class="btn" onclick="downloadResult()" id="downloadBtn" style="display: none; background: #28a745;">💾 Download Embedded HTML</button>
+        </div>
+
+        <div class="demo-card" id="resultsCard" style="display: none;">
+            <h2>📊 Processing Results</h2>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="imagesProcessed">0</div>
+                    <div class="stat-label">Images Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="replacementsMade">0</div>
+                    <div class="stat-label">HTML Replacements</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="fileSizeOriginal">0.0 MB</div>
+                    <div class="stat-label">Original Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="fileSizeFinal">0.0 MB</div>
+                    <div class="stat-label">Final Size</div>
+                </div>
+            </div>
+
+            <div id="logContainer" class="result">
+                <h4>Processing Log:</h4>
+                <pre id="processLog"></pre>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2>🔍 Images Found in Your Project</h2>
+            <p>The following PNG files were detected in the <code>visualizations/</code> folder:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                <div class="stat-card">
+                    <img src="visualizations/pathophysiology_diagram.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>Pathophysiology Diagram</strong>
+                    <div style="font-size: 0.9rem; color: #666;">439 KB</div>
+                </div>
+                <div class="stat-card">
+                    <img src="visualizations/epidemiology_chart.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>Epidemiology Chart</strong>
+                    <div style="font-size: 0.9rem; color: #666;">364 KB</div>
+                </div>
+                <div class="stat-card">
+                    <img src="visualizations/treatment_algorithm.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>Treatment Algorithm</strong>
+                    <div style="font-size: 0.9rem; color: #666;">528 KB</div>
+                </div>
+                <div class="stat-card">
+                    <img src="visualizations/prevention_flowchart.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>Prevention Flowchart</strong>
+                    <div style="font-size: 0.9rem; color: #666;">387 KB</div>
+                </div>
+                <div class="stat-card">
+                    <img src="visualizations/national_program_diagram.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>NPCDCS Structure</strong>
+                    <div style="font-size: 0.9rem; color: #666;">594 KB</div>
+                </div>
+                <div class="stat-card">
+                    <img src="visualizations/control_strategies_diagram.png" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">
+                    <strong>Control Strategies</strong>
+                    <div style="font-size: 0.9rem; color: #666;">433 KB</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2>🎉 Alternatives Provided</h2>
+            <p>This demo uses browser JavaScript, but you have 4 complete solutions:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🐍</div>
+                    <strong>Python Solution</strong><br>
+                    <code>auto_embed_images.py</code><br>
+                    <span style="color: #666;">Cross-platform automation</span>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📦</div>
+                    <strong>Node.js Solution</strong><br>
+                    <code>embed-images.js</code><br>
+                    <span style="color: #666;">Fast with watch mode</span>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">⚙️</div>
+                    <strong>Gulp Build Tool</strong><br>
+                    <code>gulpfile.js</code><br>
+                    <span style="color: #666;">Workflow integration</span>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 3rem; margin-bottom: 10px; color: #28a745;">🌐</div>
+                    <strong>Web Interface</strong><br>
+                    <code>embed_interface.html</code><br>
+                    <span style="color: #666;">No installation needed!</span>
+                </div>
+            </div>
+
+            <p><strong>💡 Pro Tip:</strong> Use the web interface for quick jobs - it works completely offline!</p>
+        </div>
+    </div>
+
+    <script>
+        let processedHtmlContent = null;
+        const imageNames = [
+            'pathophysiology_diagram.png',
+            'epidemiology_chart.png',
+            'treatment_algorithm.png',
+            'prevention_flowchart.png',
+            'national_program_diagram.png',
+            'control_strategies_diagram.png',
+            'risk_factor_diagram.png'
+        ];
+
+        async function runDemo() {
+            const demoBtn = document.getElementById('demoBtn');
+            const resultsCard = document.getElementById('resultsCard');
+            const statusBox = document.getElementById('statusBox');
+            const progressBar = document.getElementById('progressBar');
+            const processLog = document.getElementById('processLog');
+
+            demoBtn.disabled = true;
+            demoBtn.textContent = '🔄 Processing...';
+            statusBox.className = 'status info';
+            statusBox.textContent = '🔄 Loading and reading your HTML file...';
+            resultsCard.style.display = 'block';
+
+            let logText = '🚀 Starting Diabetes HTML Image Embedding Demo\n\n';
+
+            try {
+                // Step 1: Load the HTML content
+                progressBar.style.width = '10%';
+                const htmlResponse = await fetch('interactive/diabetes_interactive_tlm.html');
+                if (!htmlResponse.ok) {
+                    throw new Error(`Failed to load HTML file: ${htmlResponse.status}`);
+                }
+
+                let htmlContent = await htmlResponse.text();
+                const originalSize = htmlContent.length;
+
+                logText += '✅ HTML file loaded\n';
+                statusBox.textContent = '🔄 Converting images to base64...';
+                processLog.textContent = logText;
+
+                // Step 2: Convert images to base64
+                const imageUris = {};
+                let imagesProcessed = 0;
+
+                for (let i = 0; i < imageNames.length; i++) {
+                    const imageName = imageNames[i];
+                    try {
+                        const imgResponse = await fetch(`visualizations/${imageName}`);
+                        if (imgResponse.ok) {
+                            const blob = await imgResponse.blob();
+                            const base64Data = await blobToBase64(blob);
+                            imageUris[imageName] = `data:image/png;base64,${base64Data}`;
+                            imagesProcessed++;
+                            logText += `✅ Encoded: ${imageName}\n`;
+                        } else {
+                            logText += `⚠️  Missing: ${imageName}\n`;
+                        }
+                    } catch (error) {
+                        logText += `❌ Error: ${imageName} - ${error.message}\n`;
+                    }
+
+                    const progress = 10 + ((i + 1) / imageNames.length * 35);
+                    progressBar.style.width = progress + '%';
+                    statusBox.textContent = `🔄 Processing ${imageName}...`;
+                    processLog.textContent = logText;
+                    await new Promise(resolve => setTimeout(resolve, 100)); // Small delay for effect
+                }
+
+                // Step 3: Process HTML content
+                progressBar.style.width = '50%';
+                statusBox.textContent = '🔄 Embedding images into HTML...';
+                logText += '\n🔄 Processing HTML replacements...\n';
+                processLog.textContent = logText;
+
+                let replacementsMade = 0;
+
+                // Replace standard img tags
+                for (const [filename, dataUri] of Object.entries(imageUris)) {
+                    const imgRegex = new RegExp(`src="([^"]*${filename})"`, 'g');
+                    const matches = htmlContent.match(imgRegex) || [];
+                    htmlContent = htmlContent.replace(imgRegex, (match, p1) => {
+                        replacementsMade++;
+                        logText += `🖼️  Replaced img src: ${filename}\n`;
+                        return match.replace(p1, dataUri);
+                    });
+                }
+
+                // Replace placeholder divs (Diabetes TLM structure)
+                const placeholderRules = [
+                    { pattern: /<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#9b59b6[^"]*">[\s\S]*?<\/div>/g, image: 'pathophysiology_diagram.png' },
+                    { pattern: /<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">(?![\s\S]*?(?:Prevention|NPCDCS|Control))[\s\S]*?<\/div>/g, image: 'epidemiology_chart.png' },
+                    { pattern: /<div[^>]*>[\s\S]*?Management Tab Diagram[\s\S]*?<\/div>\s*<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">[\s\S]*?<\/div>/g, image: 'treatment_algorithm.png' },
+                    { pattern: /<div[^>]*style="[^"]*margin-top:\s*20px[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*"[^>]*>[\s\S]*?Prevention Flowchart[\s\S]*?<\/div>/g, image: 'prevention_flowchart.png' },
+                    { pattern: /<div[^>]*style="[^"]*margin-top:\s*20px[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*"[^>]*>[\s\S]*?NPCDCS[\s\S]*?<\/div>/g, image: 'national_program_diagram.png' },
+                    { pattern: /<div[^>]*>[\s\S]*?Control Strategies[\s\S]*?<\/div>\s*<div[^>]*style="[^"]*background:\s*#f8f9fa[^"]*padding:\s*20px[^"]*border-radius:\s*8px[^"]*text-align:\s*center[^"]*border:\s*2px\s*dashed\s*#3498db[^"]*">[\s\S]*?<\/div>/g, image: 'control_strategies_diagram.png' }
+                ];
+
+                for (const rule of placeholderRules) {
+                    if (rule.image in imageUris) {
+                        const replacement = `<div style="margin-bottom: 20px;"><img src="${imageUris[rule.image]}" alt="${rule.image.replace(/_/g, ' ').replace('.png', '').replace(/\b\w/g, l => l.toUpperCase())}" style="width: 100%; border-radius: 8px;"></div>`;
+                        const matches = htmlContent.match(rule.pattern);
+                        if (matches) {
+                            htmlContent = htmlContent.replace(rule.pattern, replacement);
+                            replacementsMade++;
+                            logText += `🔄 Replaced placeholder: ${rule.image}\n`;
+                        }
+                    }
+                }
+
+                progressBar.style.width = '90%';
+                statusBox.textContent = '🔄 Finalizing...';
+
+                // Calculate sizes
+                const finalSize = htmlContent.length;
+                const originalMB = (originalSize / (1024 * 1024)).toFixed(2);
+                const finalMB = (finalSize / (1024 * 1024)).toFixed(2);
+
+                // Store result
+                processedHtmlContent = htmlContent;
+
+                progressBar.style.width = '100%';
+                logText += '\n' + '='.repeat(50) + '\n';
+                logText += '🎉 EMBEDDING COMPLETE!\n';
+                logText += `✅ Images processed: ${imagesProcessed}\n`;
+                logText += `✅ Replacements made: ${replacementsMade}\n`;
+                logText += `📁 Size: ${originalMB} MB → ${finalMB} MB\n`;
+                logText += '✅ Ready for offline use and Google Sites!\n';
+                logText += '='.repeat(50) + '\n';
+
+                processLog.textContent = logText;
+
+                // Update UI
+                document.getElementById('imagesProcessed').textContent = imagesProcessed;
+                document.getElementById('replacementsMade').textContent = replacementsMade;
+                document.getElementById('fileSizeOriginal').textContent = originalMB + ' MB';
+                document.getElementById('fileSizeFinal').textContent = finalMB + ' MB';
+
+                statusBox.className = 'status success';
+                statusBox.textContent = '✅ Success! Embedding complete - ready for download';
+                demoBtn.textContent = '✓ Complete!';
+                document.getElementById('downloadBtn').style.display = 'inline-block';
+
+            } catch (error) {
+                logText += '\n❌ Error: ' + error.message;
+                processLog.textContent = logText;
+                statusBox.className = 'status';
+                statusBox.style.background = '#f8d7da';
+                statusBox.style.color = '#721c24';
+                statusBox.style.border = '1px solid #f5c6cb';
+                statusBox.textContent = '❌ Error: ' + error.message;
+                demoBtn.disabled = false;
+                demoBtn.textContent = '🔄 Try Again';
+            }
+        }
+
+        function downloadResult() {
+            if (!processedHtmlContent) {
+                alert('No processed content available. Please run the demo first.');
+                return;
+            }
+
+            const blob = new Blob([processedHtmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'diabetes_interactive_tlm_embedded.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+    </script>
+</body>
+</html>

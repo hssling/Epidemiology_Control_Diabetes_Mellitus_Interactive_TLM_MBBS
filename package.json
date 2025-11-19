@@ -1,0 +1,16 @@
+{
+  "name": "diabetes-html-embedder",
+  "version": "1.0.0",
+  "description": "Automatically embed images into HTML files for offline use and Google Sites",
+  "main": "embed-images.js",
+  "scripts": {
+    "embed": "node embed-images.js",
+    "embed:watch": "node embed-images.js --watch",
+    "build": "node embed-images.js --compress"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": ["html", "images", "base64", "embed", "diabetes", "tlm"],
+  "author": "Diabetes TLM Project",
+  "license": "ISC"
+}
